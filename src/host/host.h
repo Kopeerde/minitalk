@@ -10,15 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// TODO : Remove <stdio.h>
-
 #ifndef HOST_H
 # define HOST_H
 
 # include <sys/types.h>
 # include <unistd.h>
-# include <stdio.h>
 # include <signal.h>
 # include <stdlib.h>
+
+# include "../lib/libft/libft.h"
+
+# define TRUE 1
 
 #endif //HOST_H

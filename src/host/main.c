@@ -14,8 +14,21 @@
 
 #include "host.h"
 
+void func()
+{
+	ft_printf("test");
+}
+
 int	main()
 {
-	printf("pid : %i", getpid());
+	struct sigaction sa = { 0 };
+	sa.sa_flags = SA_RESTART;
+	sa.sa_handler = &func;
+	ft_printf("pid : %i ", getpid());
+	while (TRUE)
+	{
+		sigaction(SIGUSR1, &sa, NULL);
+	}
+
 	return (0);
 }

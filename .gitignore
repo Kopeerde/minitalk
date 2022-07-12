@@ -1,5 +1,8 @@
 .idea/
 .vscode/
+client
+host
+.nfs*
 
 # Prerequisites
 *.d

@@ -14,13 +14,13 @@
 
 int	main(int argc, char **argv)
 {
-	int		pid;
+	int	pid_target;
 
 	if (argc == 3)
 	{
-		pid = ft_atoi(argv[1]);
-		printf("pid    : %i \nstring : %s", pid, argv[2]);
-
+		pid_target = ft_atoi(argv[1]);
+		printf("pid    : %i \nstring : %s", pid_target, argv[2]);
+		kill(pid_target, SIGUSR1);
 	}
 	else
 	{

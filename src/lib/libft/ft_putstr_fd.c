@@ -1,24 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minitalk.h                                         :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kmendes- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/07 11:31:36 by kmendes-          #+#    #+#             */
-/*   Updated: 2022/07/07 11:31:44 by kmendes-         ###   ########.fr       */
+/*   Created: 2022/07/06 14:02:35 by kmendes-          #+#    #+#             */
+/*   Updated: 2022/07/06 14:02:40 by kmendes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLIENT_H
-# define CLIENT_H
+#include "libft.h"
 
-# include <sys/types.h>
-# include <unistd.h>
-# include <signal.h>
-# include <stdlib.h>
-
-# include "../lib/libft/libft.h"
-# include "../lib/libft/ft_atoi.c"
-
-#endif //CLIENT_H
+/**
+ * This function takes a string and a file descriptor as parameters.
+ * Then print the whole string to the file descriptor.
+*/
+void	ft_putstr_fd(char *s, int fd)
+{
+	write(fd, s, ft_strlen(s));
+}
