@@ -14,9 +14,12 @@
 
 #include "host.h"
 
-void func()
+void func(int sig)
 {
-	ft_printf("test");
+	if (sig == SIGUSR1)
+		ft_printf("signal recu : 1\n");
+	else if (sig == SIGUSR2)
+		ft_printf("signal recu : 0\n");
 }
 
 int	main()
@@ -24,10 +27,11 @@ int	main()
 	struct sigaction sa = { 0 };
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = &func;
-	ft_printf("pid : %i ", getpid());
+	ft_printf("pid : %i\n", getpid());
 	while (TRUE)
 	{
 		sigaction(SIGUSR1, &sa, NULL);
+		sigaction(SIGUSR2, &sa, NULL);
 	}
 
 	return (0);

@@ -33,6 +33,7 @@ void	*ft_calloc(size_t nmemb, size_t size);
 
 size_t	ft_strlen(const char *string);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
+size_t	ft_strlcat(char *dst, const char *src, size_t size);
 
 int		ft_atoi(const char *nptr);
 int		ft_printf(const char *string, ...);

@@ -15,7 +15,7 @@ NAME = libft.a
 SRC = ft_strlen.c  ft_memset.c           \
 	  ft_strnstr.c ft_atoi.c ft_calloc.c \
 	  ft_strjoin.c ft_itoa.c ft_putstr_fd.c \
-	  ft_printf.c   \
+	  ft_printf.c  ft_strlcat.c \
 	  ft_strjoin_char.c      ft_itoa_overflow.c \
 	  ft_strjoin_free_both.c ft_convert_base.c  \
 	  ft_parse_pointer_string.c ft_strjoin_string.c ft_strchr.c

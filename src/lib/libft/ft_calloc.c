@@ -13,7 +13,7 @@
 #include "libft.h"
 
 /**
- * This function takes 2 parameters, the numbers of ele;ents, as a size_t type,
+ * This function takes 2 parameters, the numbers of elements, as a size_t type,
  * and the size of the elements (in bytes).
  * It then returns a pointer that allocate enough size ot fit all the elements
  * and initialize the whole memory with null bytes.
