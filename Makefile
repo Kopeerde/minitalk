@@ -8,7 +8,7 @@ SRC_C = ./src/client/main.c
 
 LIB_C = ./src/lib/libft/libft.a
 
-SRC_H = ./src/host/main.c
+SRC_H = ./src/host/main.c ./src/host/host_utils.c
 
 LIB_H = ./src/lib/libft/libft.a
 
