@@ -19,6 +19,5 @@
 # include <stdlib.h>
 
 # include "../lib/libft/libft.h"
-# include "../lib/libft/ft_atoi.c"
 
 #endif //CLIENT_H

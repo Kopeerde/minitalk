@@ -22,4 +22,6 @@
 
 # define TRUE 1
 
+void	func(int sig);
+
 #endif //HOST_H
