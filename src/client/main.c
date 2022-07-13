@@ -65,15 +65,14 @@ int	main(int argc, char **argv)
 				else
 					kill(pid_target, SIGUSR2);
 				i++;
-				usleep(500000);
+				usleep(500);
 			}
 			i = -1;
 			while (++i < 8) // Permet de renvoyer le char null pour signaler fin de chaine
 			{
 				kill(pid_target, SIGUSR2);
-				usleep(600000);
+				usleep(600);
 			}
-
 			free(str_bin);
 		}
 		else
