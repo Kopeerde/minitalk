@@ -14,7 +14,7 @@
 
 #include "host.h"
 
-static int raise_power(int power)
+static int	raise_power(int power)
 {
 	int	res;
 
@@ -27,10 +27,10 @@ static int raise_power(int power)
 	return (res);
 }
 
-static char bin_to_char(char *bin)
+char	bin_to_char(char *bin)
 {
 	int	res;
-	int		i;
+	int	i;
 
 	res = 0;
 	i = 0;
@@ -47,7 +47,7 @@ void	func(int sig)
 {
 	static char	*res;
 	static char	*c;
-	char 		temp;
+	char		temp;
 
 	if (!c)
 	{
@@ -61,44 +61,13 @@ void	func(int sig)
 		if (!res)
 			return ;
 	}
-	if (sig == SIGINT)
-	{
-		ft_printf("On quitte gracieusement en liberant tout"); // TODO : remove line
-		free(c);
-		free(res);
-		exit(0);
-	}
-	if (sig == SIGUSR1)
-	{
-		//ft_printf("1");
-		ft_strlcat(c, "1", 9);
-	}
-	else if (sig == SIGUSR2)
-	{
-		//ft_printf("0");
-		ft_strlcat(c, "0", 9);
-	}
-	if (ft_strlen(c) == 8)
-	{
-		temp = bin_to_char(c);
-		if (temp == '\0')
-		{
-			//ft_printf("\nFin de chaine detectee\n"); // TODO : Remove line
-			ft_printf("%s", res); // TODO : print la chaine
-			ft_memset(res, '\0', ft_strlen(res));
-		}
-		else
-		{
-			//ft_printf("\n%s\n", &temp);
-			ft_strlcat(res, &temp, 1000); // TODO : ajouter le charactere converti dans res
-		}
-		ft_memset(c, '\0', 9);
-	}
+	signal_handler(sig, res, c);
+	res_c_setter(res, c, &temp);
 }
 
 int	main(void)
 {
-	struct sigaction	sa = {0};
+	struct sigaction	sa;
 
 	sa.sa_flags = SA_RESTART;
 	sa.sa_handler = &func;

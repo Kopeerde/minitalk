@@ -12,28 +12,20 @@
 
 #include "client.h"
 
-static char	*str_to_bin(char *s)
+static void	converter(const char *s, char *res, size_t len)
 {
-	char		*res;
-	char		c;
-	size_t		i;
-	size_t		len;
-	int			j;
+	char	c;
+	size_t	i;
+	int		j;
 
-	if (s == NULL) // Cas ou la chaine est nulle
-		return (0);
-	len = ft_strlen(s);
-	res = ft_calloc(len * 8 + 1, sizeof(char));
-	if (!res) // check du malloc
-		return (0);
 	i = 0;
-	while (i < len) // conversion des chars en bits
+	while (i < len)
 	{
-		c = s[i]; // stocke le charactere
+		c = s[i];
 		j = 7;
-		while (j >= 0) // check chaque bits du charactere
+		while (j >= 0)
 		{
-			if (c & (1 << j)) // si le char existe (en bit) et que le bit vaut 1
+			if (c & (1 << j))
 				ft_strlcat(res, "1", len * 8 + 1);
 			else
 				ft_strlcat(res, "0", len * 8 + 1);
@@ -41,39 +33,58 @@ static char	*str_to_bin(char *s)
 		}
 		i++;
 	}
+}
+
+static char	*str_to_bin(char *s)
+{
+	char		*res;
+	size_t		len;
+
+	if (s == NULL)
+		return (0);
+	len = ft_strlen(s);
+	res = ft_calloc(len * 8 + 1, sizeof(char));
+	if (!res)
+		return (0);
+	converter(s, res, len);
 	return (res);
+}
+
+void	send_signals(char *const *argv, int pid_target)
+{
+	size_t	i;
+	char	*str_bin;
+
+	str_bin = str_to_bin(argv[2]);
+	i = 0;
+	while (str_bin[i])
+	{
+		if (str_bin[i] == '1')
+			kill(pid_target, SIGUSR1);
+		else
+			kill(pid_target, SIGUSR2);
+		i++;
+		usleep(500);
+	}
+	i = -1;
+	while (++i < 8)
+	{
+		kill(pid_target, SIGUSR2);
+		usleep(600);
+	}
+	free(str_bin);
 }
 
 int	main(int argc, char **argv)
 {
 	int		pid_target;
-	size_t	i;
-	char	*str_bin;
 
 	if (argc == 3)
 	{
 		pid_target = ft_atoi(argv[1]);
 		if (kill(pid_target, 0) == 0)
 		{
-			str_bin = str_to_bin(argv[2]);
-			printf("pid    : %i \nstring : %s\nconversion : %s\n", pid_target, argv[2], str_bin);
-			i = 0;
-			while (str_bin[i])
-			{
-				if (str_bin[i] == '1')
-					kill(pid_target, SIGUSR1);
-				else
-					kill(pid_target, SIGUSR2);
-				i++;
-				usleep(500);
-			}
-			i = -1;
-			while (++i < 8) // Permet de renvoyer le char null pour signaler fin de chaine
-			{
-				kill(pid_target, SIGUSR2);
-				usleep(600);
-			}
-			free(str_bin);
+			send_signals(argv, pid_target);
 		}
 		else
 			ft_printf("Mauvais pid");
