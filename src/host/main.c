@@ -48,7 +48,7 @@ void	func(int sig, siginfo_t *info, __attribute__((unused)) void *content)
 	static char	*res;
 	static char	*c;
 	char		temp;
-	int 		pid_sender;
+	int			pid_sender;
 
 	pid_sender = info->si_pid;
 	if (!c)
@@ -79,7 +79,6 @@ int	main(void)
 	sigaction(SIGINT, &sa, NULL);
 	while (TRUE)
 	{
-
 	}
 	return (0);
 }
