@@ -64,13 +64,13 @@ void	send_signals(char *const *argv, int pid_target)
 		else
 			kill(pid_target, SIGUSR2);
 		i++;
-		usleep(500);
+		usleep(90);
 	}
 	i = -1;
 	while (++i < 8)
 	{
 		kill(pid_target, SIGUSR2);
-		usleep(600);
+		usleep(90);
 	}
 	free(str_bin);
 }
