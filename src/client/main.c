@@ -84,7 +84,10 @@ int	main(int argc, char **argv)
 		pid_target = ft_atoi(argv[1]);
 		if (kill(pid_target, 0) == 0)
 		{
-			send_signals(argv, pid_target);
+			if (ft_strlen(argv[2]) >= 1000)
+				ft_printf("Veuillez envoyer un msg de moins de 1K chars");
+			else
+				send_signals(argv, pid_target);
 		}
 		else
 			ft_printf("Mauvais pid");
