@@ -22,7 +22,7 @@
 
 # define TRUE 1
 
-void	func(int sig);
+void	func(int sig, siginfo_t *info, void *content);
 void	signal_handler(int sig, char *res, char *c);
 void	res_c_setter(char *res, char *c, char *temp);
 

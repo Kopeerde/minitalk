@@ -43,12 +43,14 @@ char	bin_to_char(char *bin)
 	return ((char) res);
 }
 
-void	func(int sig)
+void	func(int sig, siginfo_t *info, __attribute__((unused)) void *content)
 {
 	static char	*res;
 	static char	*c;
 	char		temp;
+	int 		pid_sender;
 
+	pid_sender = info->si_pid;
 	if (!c)
 	{
 		c = ft_calloc(9, sizeof(char));
@@ -69,14 +71,15 @@ int	main(void)
 {
 	struct sigaction	sa;
 
-	sa.sa_flags = SA_RESTART;
-	sa.sa_handler = &func;
+	sa.sa_flags = SA_SIGINFO;
+	sa.sa_sigaction = func;
 	ft_printf("pid : %i\n", getpid());
+	sigaction(SIGUSR1, &sa, NULL);
+	sigaction(SIGUSR2, &sa, NULL);
+	sigaction(SIGINT, &sa, NULL);
 	while (TRUE)
 	{
-		sigaction(SIGUSR1, &sa, NULL);
-		sigaction(SIGUSR2, &sa, NULL);
-		sigaction(SIGINT, &sa, NULL);
+
 	}
 	return (0);
 }
