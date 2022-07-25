@@ -1,6 +1,6 @@
 
 NAME_C = client
-NAME_H = host
+NAME_H = server
 
 FLAGS = -Wall -Wextra -Werror -g3 -gdwarf-4
 
@@ -30,7 +30,7 @@ clean:
 fclean: clean
 	cd ./src/lib/libft && make fclean
 	rm -f client
-	rm -f host
+	rm -f server
 
 re: fclean
 	make
